@@ -10,6 +10,7 @@ class App extends Component {
     super(props)
 
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.logOut = this.logOut.bind(this)
   }
 
   componentDidMount() {
@@ -28,18 +29,22 @@ class App extends Component {
     return false
   }
 
+  logOut() {
+    this.props.dispatch(Actions.userLogout())
+  }
+
   loadingOrNot() {
     if (this.props.valid_auth.auth_state) {
       if (this.props.valid_auth.auth_state === "yes") {
         return (
           <p className="App-intro">
-            LOGGED IN SUCCESSFULLY
+            LOGGED IN SUCCESSFULLY, <a onClick={this.logOut}>LOG OUT</a>
           </p>
         );
       } else {
         return (
-          <form on_submit={this.handleSubmit} auto_complete="on">
-            <div className={style.inputGroup}>
+          <form onSubmit={this.handleSubmit} autoComplete="on">
+            <div>
               <label htmlFor="email">Email</label>
               <input
                 type="email"
@@ -47,7 +52,7 @@ class App extends Component {
                 name="email"
                 autoComplete="on" />
             </div>
-            <div className={style.inputGroup}>
+            <div>
               <label htmlFor="password">Password</label>
               <input
                 type="password"
@@ -75,6 +80,7 @@ class App extends Component {
           <img src={logo} className="App-logo" alt="logo" />
           <h1 className="App-title">Welcome to React</h1>
         </header>
+        <br /><br />
         { this.loadingOrNot() }
       </div>
     );

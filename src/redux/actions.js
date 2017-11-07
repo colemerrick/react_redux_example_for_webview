@@ -16,7 +16,7 @@ Actions.setValidAuth = function setValidAuth(auth_state) {
 
 // BELOW WILL BE USED WHEN I RELOAD THE BROWSER
 Actions.userAuth = function userAuth() {
-  return dispatch => fetch(process.env.API_HOST + "/auth/me", {
+  return dispatch => fetch("https://hidden-mountain-64175.herokuapp.com" + "/auth/me", {
     method: "GET",
     headers: {
       Accept: "application/json",
