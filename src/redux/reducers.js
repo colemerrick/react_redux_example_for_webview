@@ -1,21 +1,51 @@
 import { combineReducers } from "redux"
 
-import { STOP_LOADING } from './actions'
+import { SET_VALID_AUTH, USER_LOGIN, USER_AUTH,
+         USER_LOGOUT } from './actions'
 
-function loaders(state = {
- loading: true
+function valid_auth(state = {
+ auth_state: ''
 }, action) {
  switch (action.type) {
-   case STOP_LOADING:
+   case SET_VALID_AUTH:
      return Object.assign({}, state, {
-       loading: action.loading
+       auth_state: action.auth_state
      })
    default: return state
  }
 }
 
+function user(state = {
+  email: "",
+  id: "",
+  username: ""
+}, action) {
+  switch (action.type) {
+    case USER_AUTH:
+      return Object.assign({}, state, {
+        email: action.payload.user.email,
+        id: action.payload.user.id,
+        username: action.payload.user.username
+      })
+    case USER_LOGIN:
+      return Object.assign({}, state, {
+        email: action.payload.user.email,
+        id: action.payload.user.id,
+        username: action.payload.user.username
+      })
+    case USER_LOGOUT:
+      return Object.assign({}, state, {
+        email: action.payload.user.email,
+        id: action.payload.user.id,
+        username: action.payload.user.username
+      })
+    default: return state
+  }
+}
+
 const reducers = combineReducers({
-  loaders
+  user,
+  valid_auth
 })
 
 export default reducers
